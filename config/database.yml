@@ -16,7 +16,7 @@ development:
   #database: db/development.sqlite3
   adapter: postgresql
   encoding: unicode
-  database: polls
+  database: polls_development
   username: diego
   password: 123456
 
