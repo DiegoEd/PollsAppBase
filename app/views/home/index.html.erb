@@ -3,4 +3,5 @@
 <% @polls.each do |poll| %>
 	<h2><%= link_to poll.title, answer_poll_path(poll) %></h2>
 	<p><%= poll.description %></p>
+	<p><%= link_to "Ver resultados de la encuesta", show_answers_poll_path(poll) %></p>
 <% end %>
