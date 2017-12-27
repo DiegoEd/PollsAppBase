@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Pregunta:</strong>
+  <%= @question.question %>
+</p>
+
+<p>
+  <strong>Encuesta:</strong>
+  <%= link_to @question.poll.title, @poll %>
+</p>
+
+<%= link_to 'Edit', edit_poll_question_path(@poll, @question) %>
+<hr>
+<%=  render "options/form" %>
+<p>
+	<strong>Opciones disponibles: </strong>
+</p>
+<% @question.options.each do |option| %>
+	<p>* <%= option.option %></p>
+<% end %>

@@ -1,0 +1,24 @@
+<h1>
+  <strong><%= @poll.title %></strong>
+</h1>
+<p>
+  <%= @poll.description %>
+</p>
+<p>
+	<strong>Preguntas:</strong>
+</p>
+<div>
+	<%= form_with(model: @poll, :url => save_answer_poll_path, method: :post) do |form| %>
+		<% @poll.questions.each do |question| %>
+			<div class="field">
+				<p>- <%= question.question %></p>
+				<% question.options.each do |option| %>
+					<%= radio_button_tag "poll[question#{question.id}]", option.id %> <%= option.option %>
+				<% end %>
+			</div>
+		<% end %>
+		<div class="actions">
+    		<%= form.submit "Enviar Respuestas" %>
+  		</div>
+	<% end %>
+</div>

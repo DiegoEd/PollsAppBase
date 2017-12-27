@@ -1,6 +1,7 @@
 class PollsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_poll, only: [:show, :edit, :update, :destroy]
+  before_action :set_poll, only: [:show, :edit, :update, :destroy, :answer, :show_answers]
+  before_action :answered, only: [:answer]
 
   # GET /polls
   # GET /polls.json
@@ -11,6 +12,7 @@ class PollsController < ApplicationController
   # GET /polls/1
   # GET /polls/1.json
   def show
+    @question = Question.new
   end
 
   # GET /polls/new
@@ -62,6 +64,25 @@ class PollsController < ApplicationController
     end
   end
 
+  def answer
+  end
+
+  def save_answer
+    @options = params[:poll]
+    @options.each do |key, value|
+      user_poll_option = UserPollOption.new
+      user_poll_option.user_id = current_user.id
+      user_poll_option.poll_id = params[:id]
+      user_poll_option.option_id = value
+      user_poll_option.save
+    end
+
+    redirect_to root_path, notice: "Respuestas guardadas en el servidor."
+  end
+
+  def show_answers
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_poll
@@ -71,5 +92,11 @@ class PollsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def poll_params
       params.require(:poll).permit(:title, :description, :version)
+    end
+
+    def answered
+      if UserPollOption.where(user_id: current_user.id).count > 0
+        redirect_to root_path, notice: "Solo puede contestar a la encuesta una vez."
+      end
     end
 end
