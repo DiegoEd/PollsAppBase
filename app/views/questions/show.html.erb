@@ -17,5 +17,5 @@
 	<strong>Opciones disponibles: </strong>
 </p>
 <% @question.options.each do |option| %>
-	<p>* <%= option.option %></p>
+	<p>* <%= option.option %> <%= link_to "Editar", edit_poll_question_option_path(@poll.id, @question.id, option.id) %></p> 
 <% end %>

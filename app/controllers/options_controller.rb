@@ -2,22 +2,23 @@ class OptionsController < ApplicationController
   before_action :set_option, only: [:show, :edit, :update, :destroy]
   before_action :set_poll_question
   before_action :authenticate_user!
+  before_action :authenticate_admin!
 
   # GET /options
   # GET /options.json
-  def index
-    @options = Option.all
-  end
+  #def index
+  #  @options = Option.all
+  #end
 
   # GET /options/1
   # GET /options/1.json
-  def show
-  end
+  #def show
+  #end
 
   # GET /options/new
-  def new
-    @option = Option.new
-  end
+  #def new
+  #  @option = Option.new
+  #send
 
   # GET /options/1/edit
   def edit
@@ -45,8 +46,8 @@ class OptionsController < ApplicationController
   def update
     respond_to do |format|
       if @option.update(option_params)
-        format.html { redirect_to @option, notice: 'Option was successfully updated.' }
-        format.json { render :show, status: :ok, location: @option }
+        format.html { redirect_to poll_question_path(@poll, @question), notice: 'Option was successfully updated.' }
+        format.json { render :show, status: :ok, location: poll_question_path(@poll, @question) }
       else
         format.html { render :edit }
         format.json { render json: @option.errors, status: :unprocessable_entity }

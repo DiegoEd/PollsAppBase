@@ -2,12 +2,13 @@ class QuestionsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_question, only: [:show, :edit, :update, :destroy]
   before_action :set_poll
+  before_action :authenticate_admin!
 
   # GET /questions
   # GET /questions.json
-  def index
-    @questions = Question.all
-  end
+  #def index
+  #  @questions = Question.all
+  #end
 
   # GET /questions/1
   # GET /questions/1.json
@@ -16,9 +17,9 @@ class QuestionsController < ApplicationController
   end
 
   # GET /questions/new
-  def new
-    @question = Question.new
-  end
+  #def new
+  #  @question = Question.new
+  #end
 
   # GET /questions/1/edit
   def edit
@@ -46,8 +47,8 @@ class QuestionsController < ApplicationController
   def update
     respond_to do |format|
       if @question.update(question_params)
-        format.html { redirect_to @question, notice: 'Question was successfully updated.' }
-        format.json { render :show, status: :ok, location: @question }
+        format.html { redirect_to poll_question_path(@poll, @question), notice: 'Question was successfully updated.' }
+        format.json { render :show, status: :ok, location: poll_question_path(@poll, @question) }
       else
         format.html { render :edit }
         format.json { render json: @question.errors, status: :unprocessable_entity }
