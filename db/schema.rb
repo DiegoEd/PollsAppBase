@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171222212712) do
+ActiveRecord::Schema.define(version: 20171226205239) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "options", force: :cascade do |t|
+    t.string "option"
+    t.bigint "question_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_options_on_question_id"
+  end
 
   create_table "polls", force: :cascade do |t|
     t.string "title"
@@ -21,6 +29,25 @@ ActiveRecord::Schema.define(version: 20171222212712) do
     t.integer "version"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.string "question"
+    t.bigint "poll_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["poll_id"], name: "index_questions_on_poll_id"
+  end
+
+  create_table "user_poll_options", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "poll_id"
+    t.bigint "option_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["option_id"], name: "index_user_poll_options_on_option_id"
+    t.index ["poll_id"], name: "index_user_poll_options_on_poll_id"
+    t.index ["user_id"], name: "index_user_poll_options_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -40,4 +67,9 @@ ActiveRecord::Schema.define(version: 20171222212712) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "options", "questions"
+  add_foreign_key "questions", "polls"
+  add_foreign_key "user_poll_options", "options"
+  add_foreign_key "user_poll_options", "polls"
+  add_foreign_key "user_poll_options", "users"
 end

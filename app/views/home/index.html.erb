@@ -1,2 +1,6 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<p id="notice"><%= notice %></p>
+<h1>Elija una encuesta para comenzar</h1>
+<% @polls.each do |poll| %>
+	<h2><%= link_to poll.title, answer_poll_path(poll) %></h2>
+	<p><%= poll.description %></p>
+<% end %>

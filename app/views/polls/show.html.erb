@@ -1,19 +1,29 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Title:</strong>
+  <strong>Título de la encuesta:</strong>
   <%= @poll.title %>
 </p>
 
 <p>
-  <strong>Description:</strong>
+  <strong>Descripción:</strong>
   <%= @poll.description %>
 </p>
 
 <p>
-  <strong>Version:</strong>
+  <strong>Versión:</strong>
   <%= @poll.version %>
 </p>
-
 <%= link_to 'Edit', edit_poll_path(@poll) %> |
 <%= link_to 'Back', polls_path %>
+<hr>
+<div>
+	<%= render "questions/form" %>
+</div>
+<p>
+	<strong>Preguntas de la encuesta: </strong>
+</p>
+<% @poll.questions.each do |question| %>
+	<p>- <%= link_to question.question, poll_question_path(@poll, question) %></p>
+<% end %>
+
