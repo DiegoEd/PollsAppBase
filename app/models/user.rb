@@ -9,6 +9,6 @@ class User < ApplicationRecord
   end
 
   def is_admin?
-  	self.permission >=2
+  	self.permission >= 2
   end
 end
