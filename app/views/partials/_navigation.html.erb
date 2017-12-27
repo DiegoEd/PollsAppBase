@@ -1,0 +1,15 @@
+<header>
+	<nav>
+		<ul>
+			<% if user_signed_in? %>
+				<li><%= link_to "Cerrar sesion", destroy_user_session_path, method: :delete %></li>
+				<% if current_user.is_admin? %>
+					<li><%= link_to "Encuestas", polls_path %></li>
+				<% end %>
+			<% else %>
+				<li><%= link_to "Iniciar sesion", new_user_session_path %></li>
+				<li><%= link_to "Registro", new_user_registration_path %></li>
+			<% end %>
+		</ul>
+	</nav>
+</header>

@@ -5,7 +5,7 @@
 <hr>
 <div>
 	<% @poll.questions.each do |question| %>
-		<p>(*) <%= question.question %></p>
+		<p><strong>(*) <%= question.question %></strong></p>
 		<% question.options.each do |option| %>
 			<p>***=>  <%= option.option %>: <%= option.count_responses %> persona/s respondieron esto</p>
 		<% end %>

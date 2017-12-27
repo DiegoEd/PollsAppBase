@@ -4,14 +4,14 @@
 <p>
   <%= @poll.description %>
 </p>
-<p>
+<h3>
 	<strong>Preguntas:</strong>
-</p>
+</h3>
 <div>
 	<%= form_with(model: @poll, :url => save_answer_poll_path, method: :post) do |form| %>
 		<% @poll.questions.each do |question| %>
 			<div class="field">
-				<p>- <%= question.question %></p>
+				<p><strong>- <%= question.question %></strong></p>
 				<% question.options.each do |option| %>
 					<%= radio_button_tag "poll[question#{question.id}]", option.id %> <%= option.option %>
 				<% end %>
