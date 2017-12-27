@@ -1,8 +1,8 @@
 class PollsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_poll, only: [:show, :edit, :update, :destroy, :answer, :show_answers]
-  before_action :answered, only: [:answer]
-  before_action :authenticate_admin!, except: [:answer, :save_answer]
+  #before_action :answered, only: [:answer]
+  before_action :authenticate_admin!, except: [:answer, :save_answer, :show_answers]
 
   # GET /polls
   # GET /polls.json
