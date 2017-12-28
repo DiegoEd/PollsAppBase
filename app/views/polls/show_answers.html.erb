@@ -7,8 +7,9 @@
 	<% @poll.questions.each do |question| %>
 		<p><strong>(*) <%= question.question %></strong></p>
 		<% question.options.each do |option| %>
-			<p>***=>  <%= option.option %>: <%= option.count_responses %> persona/s respondieron esto</p>
+			<p>***=>  <%= option.option %>: <%= option.count_responses %> persona/s respondieron esto. | <%= link_to "Ver usuarios que votarion esta opción", poll_question_option_path(@poll, question, option) %></p>
 		<% end %>
 		<hr>
 	<% end %>
 </div>
+<p><%= link_to "Volver", root_path %></p>

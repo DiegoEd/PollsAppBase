@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   devise_for :users
   resources :polls do
   	resources :questions, only: [:create, :destroy, :edit, :update, :show] do
-  		resources :options, only: [:create, :destroy, :edit, :update]
+  		resources :options, only: [:create, :destroy, :edit, :update, :show]
   	end 
   	member do
   		get :answer
