@@ -2,7 +2,7 @@ class OptionsController < ApplicationController
   before_action :set_option, only: [:show, :edit, :update, :destroy]
   before_action :set_poll_question
   before_action :authenticate_user!
-  before_action :authenticate_admin!
+  before_action :authenticate_admin!, except: [:show]
 
   # GET /options
   # GET /options.json
@@ -12,8 +12,8 @@ class OptionsController < ApplicationController
 
   # GET /options/1
   # GET /options/1.json
-  #def show
-  #end
+  def show
+  end
 
   # GET /options/new
   #def new

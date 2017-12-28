@@ -1,14 +1,9 @@
 <p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Option:</strong>
-  <%= @option.option %>
-</p>
-
-<p>
-  <strong>Question:</strong>
-  <%= @option.question %>
-</p>
-
-<%= link_to 'Edit', edit_option_path(@option) %> |
-<%= link_to 'Back', options_path %>
+<h1><strong><%= @question.question %> : <%= @option.option %></strong></h1>
+<h3><%= @option.count_responses %> persona/s respondieron esto.</h3>
+<ul>
+	<% @option.users.each do |user| %>
+		<li><%= user.email %></li>
+	<% end %>
+</ul>
+<%= link_to "Volver", show_answers_poll_path(@poll) %>
